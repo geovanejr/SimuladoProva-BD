@@ -76,4 +76,15 @@ public class Musica implements Serializable {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Musica{");
+        sb.append("codMusica=").append(codMusica);
+        sb.append(", duracao=").append(duracao);
+        sb.append(", titulo='").append(titulo).append('\'');
+        sb.append(", categoria=").append(categoria);
+        sb.append('}');
+        return sb.toString();
+    }
 }
