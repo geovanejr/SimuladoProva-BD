@@ -30,8 +30,7 @@ public class Telefone implements Serializable {
     public Telefone() {
     }
 
-    public Telefone(Long codFone, String numero, TipoTelefone tipoTelefone, Pessoa pessoa) {
-        this.codFone = codFone;
+    public Telefone(String numero, TipoTelefone tipoTelefone, Pessoa pessoa) {
         this.numero = numero;
         this.tipoTelefone = (tipoTelefone == null) ? null : tipoTelefone.getTipoTelefone();
         this.pessoa = pessoa;

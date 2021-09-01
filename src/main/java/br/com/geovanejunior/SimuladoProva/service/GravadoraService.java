@@ -29,7 +29,7 @@ public class GravadoraService {
                 "Gravadora não encontrada. Id: " + codGravadora + ", Tipo: " + Gravadora.class.getName()
         ));
     }
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = false)
     public void save(Gravadora gravadora) {
 
         gravadoraRepo.save(gravadora);

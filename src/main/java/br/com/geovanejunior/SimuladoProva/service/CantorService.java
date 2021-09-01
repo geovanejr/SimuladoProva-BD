@@ -30,7 +30,7 @@ public class CantorService {
         ));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = false)
     public void save(Cantor cantor) {
 
         cantorRepo.save(cantor);

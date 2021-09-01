@@ -29,7 +29,7 @@ public class CategoriaService {
                 "Funcionario não encontrado. Id: " + codCategoria + ", Tipo: " + Categoria.class.getName()));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = false)
     public void save(Categoria categoria) {
 
         categRepo.save(categoria);

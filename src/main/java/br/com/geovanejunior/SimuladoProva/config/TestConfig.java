@@ -32,14 +32,7 @@ public class TestConfig {
 
         Random random = new Random();
         int numAleatorio = 0;
-
-        if (num == 87654) {
-
-            numAleatorio = random.nextInt(num) + 38000001;
-        } else {
-
-            numAleatorio = random.nextInt(num) + 999000001;
-        }
+        numAleatorio = random.nextInt(num) + 1;
 
         return numAleatorio;
     }
@@ -49,6 +42,22 @@ public class TestConfig {
         Random random = new Random();
 
         int numAleatorio = random.nextInt(num);
+        return numAleatorio;
+    }
+
+    private int obtemNumTelAleatorio(Integer num) {
+
+        Random random = new Random();
+        int numAleatorio = 0;
+
+        if (num == 87654) {
+
+            numAleatorio = random.nextInt(num) + 38000001;
+        } else {
+
+            numAleatorio = random.nextInt(num) + 999000001;
+        }
+
         return numAleatorio;
     }
 
@@ -129,17 +138,17 @@ public class TestConfig {
                     String ddd = String.valueOf(pes.getCodPessoa());
                     if (pes.getCodPessoa() % 5 == 0) {
 
-                        Telefone tel1 = new Telefone(null, ddd + "1" + String.valueOf(obtemNumAleatorio(987654)), TipoTelefone.CELULAR, lst);
-                        Telefone tel2 = new Telefone(null, ddd + "1" + String.valueOf(obtemNumAleatorio(87654)), TipoTelefone.RESIDENCIAL, lst);
+                        Telefone tel1 = new Telefone(ddd + "1" + String.valueOf(obtemNumTelAleatorio(987654)), TipoTelefone.CELULAR, lst);
+                        Telefone tel2 = new Telefone(ddd + "1" + String.valueOf(obtemNumTelAleatorio(87654)), TipoTelefone.RESIDENCIAL, lst);
                         pes.getTelefones().addAll(Arrays.asList(tel1, tel2));
                         pesServ.save(pes);
                         telServ.save(tel1);
                         telServ.save(tel2);
                     } else if (pes.getCodPessoa() % 3 == 0) {
 
-                        Telefone tel1 = new Telefone(null, ddd + "1" + String.valueOf(obtemNumAleatorio(987654)), TipoTelefone.CELULAR, lst);
-                        Telefone tel2 = new Telefone(null, ddd + "1" + String.valueOf(obtemNumAleatorio(87654)), TipoTelefone.COMERCIAL, lst);
-                        Telefone tel3 = new Telefone(null, ddd + "1" + String.valueOf(obtemNumAleatorio(87654)), TipoTelefone.RESIDENCIAL, lst);
+                        Telefone tel1 = new Telefone(ddd + "1" + String.valueOf(obtemNumTelAleatorio(987654)), TipoTelefone.CELULAR, lst);
+                        Telefone tel2 = new Telefone(ddd + "1" + String.valueOf(obtemNumTelAleatorio(87654)), TipoTelefone.COMERCIAL, lst);
+                        Telefone tel3 = new Telefone(ddd + "1" + String.valueOf(obtemNumTelAleatorio(87654)), TipoTelefone.RESIDENCIAL, lst);
                         pes.getTelefones().addAll(Arrays.asList(tel1, tel2, tel3));
                         pesServ.save(pes);
                         telServ.save(tel1);
@@ -147,10 +156,10 @@ public class TestConfig {
                         telServ.save(tel3);
                     } else if (pes.getCodPessoa() % 2 == 0) {
 
-                        Telefone tel1 = new Telefone(null, ddd + "1" + String.valueOf(obtemNumAleatorio(987654)), TipoTelefone.CELULAR, lst);
-                        Telefone tel2 = new Telefone(null, ddd + "1" + String.valueOf(obtemNumAleatorio(87654)), TipoTelefone.COMERCIAL, lst);
-                        Telefone tel3 = new Telefone(null, ddd + "1" + String.valueOf(obtemNumAleatorio(87654)), TipoTelefone.RESIDENCIAL, lst);
-                        Telefone tel4 = new Telefone(null, ddd + "1" + String.valueOf(obtemNumAleatorio(87654)), TipoTelefone.OUTRO, lst);
+                        Telefone tel1 = new Telefone(ddd + "1" + String.valueOf(obtemNumTelAleatorio(987654)), TipoTelefone.CELULAR, lst);
+                        Telefone tel2 = new Telefone(ddd + "1" + String.valueOf(obtemNumTelAleatorio(87654)), TipoTelefone.COMERCIAL, lst);
+                        Telefone tel3 = new Telefone(ddd + "1" + String.valueOf(obtemNumTelAleatorio(87654)), TipoTelefone.RESIDENCIAL, lst);
+                        Telefone tel4 = new Telefone(ddd + "1" + String.valueOf(obtemNumTelAleatorio(87654)), TipoTelefone.OUTRO, lst);
                         pes.getTelefones().addAll(Arrays.asList(tel1, tel2, tel3, tel4));
                         pesServ.save(pes);
                         telServ.save(tel1);
@@ -159,8 +168,8 @@ public class TestConfig {
                         telServ.save(tel4);
                     } else {
 
-                        Telefone tel1 = new Telefone(null, ddd + "1" + String.valueOf(obtemNumAleatorio(987654)), TipoTelefone.CELULAR, lst);
-                        pes.getTelefones().addAll(Arrays.asList(tel1));
+                        Telefone tel1 = new Telefone(ddd + "1" + String.valueOf(obtemNumTelAleatorio(987654)), TipoTelefone.CELULAR, pes);
+                        pes.getTelefones().add(tel1);
                         pesServ.save(pes);
                         telServ.save(tel1);
                     }
@@ -287,20 +296,20 @@ public class TestConfig {
         };
     }
 
-//    @Bean
-//    public CommandLineRunner cargaDepartamento(DepartamentoService deptoService) {
-//        return args -> {
-//
-//            deptoService.save(new Departamento("Recursos Humanos"));
-//            deptoService.save(new Departamento("Jurídico"));
-//            deptoService.save(new Departamento("Diretoria de Tecnologia da Informação"));
-//            deptoService.save(new Departamento("Diretoria Financeira"));
-//            deptoService.save(new Departamento("Vendas"));
-//            deptoService.save(new Departamento("Diretoria Comercial"));
-//        };
-//    }
-//
-//    @Bean
+    @Bean
+    public CommandLineRunner cargaDepartamento(DepartamentoService deptoService) {
+        return args -> {
+
+            deptoService.save(new Departamento("Recursos Humanos"));
+            deptoService.save(new Departamento("Jurídico"));
+            deptoService.save(new Departamento("Diretoria de Tecnologia da Informação"));
+            deptoService.save(new Departamento("Diretoria Financeira"));
+            deptoService.save(new Departamento("Vendas"));
+            deptoService.save(new Departamento("Diretoria Comercial"));
+        };
+    }
+
+    //    @Bean
 //    public CommandLineRunner listaTodosDepartamento(DepartamentoService deptoService) {
 //
 //        return args -> {
@@ -315,36 +324,36 @@ public class TestConfig {
 //
 //    }
 //
-//    @Bean
-//    public CommandLineRunner cargaFuncionario(FuncionarioService funcService,
-//                                              DepartamentoService deptoService) {
-//
-//        return args -> {
-//
-//            List<Departamento> listDepto = deptoService.findAll();
-//
-//            int qtdeDepto = listDepto.size();
-//
-//            for (int i = 1; i <= 100; i++) {
-//
-//                Long idDepto = Long.valueOf(obtemNumAleatorio(qtdeDepto));
-//                Integer numDepend = obtemDependenteAleatorio(3);
-//
-//                Optional<Departamento> depto = deptoService.findById(idDepto);
-//
-//                if (!depto.isEmpty()) {
-//
-//                    log.info(depto.toString());
-//                    Departamento newDepto = depto.get();
-//
-//                    Funcionario func = new Funcionario("Funcionario" + i, numDepend, (1000F + (1200F * numDepend) + (i * 100)), "Cargo " + newDepto.getId(), newDepto);
-//                    funcService.save(func);
-//                    log.info("OK");
-//                }
-//            }
-//        };
-//    }
-//
+    @Bean
+    public CommandLineRunner cargaFuncionario(FuncionarioService funcService,
+                                              DepartamentoService deptoService) {
+
+        return args -> {
+
+            List<Departamento> listDepto = deptoService.findAll();
+
+            int qtdeDepto = listDepto.size();
+
+            for (int i = 1; i <= 100; i++) {
+
+                Long idDepto = Long.valueOf(obtemNumAleatorio(qtdeDepto));
+                Integer numDepend = obtemDependenteAleatorio(3);
+
+                Optional<Departamento> depto = deptoService.findById(idDepto);
+
+                if (depto.isPresent()) {
+
+                    log.info(depto.toString());
+                    Departamento newDepto = depto.get();
+
+                    Funcionario func = new Funcionario("Funcionario" + i, numDepend, (1000F + (1200F * numDepend) + (i * 100)), "Cargo " + newDepto.getId(), newDepto);
+                    funcService.save(func);
+                    log.info("OK");
+                }
+            }
+        };
+    }
+
 ////    @Bean
 ////    public CommandLineRunner listaTodosFuncionarios(FuncionarioService funcService) {
 ////

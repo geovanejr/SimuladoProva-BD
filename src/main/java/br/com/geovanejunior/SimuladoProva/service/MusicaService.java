@@ -47,7 +47,7 @@ public class MusicaService {
 //        musicaRepo.save(musica);
 //    }
 //
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = false)
     public void saveMusica(Integer duracao, String titulo, Long codCategoria) {
 
         var categ = categoriaServ.findById(codCategoria);

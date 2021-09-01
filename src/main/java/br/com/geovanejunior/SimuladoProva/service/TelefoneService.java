@@ -21,7 +21,7 @@ public class TelefoneService {
         return telefRepo.findAll();
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = false)
     public void save(Telefone telefone) {
 
         telefRepo.save(telefone);
