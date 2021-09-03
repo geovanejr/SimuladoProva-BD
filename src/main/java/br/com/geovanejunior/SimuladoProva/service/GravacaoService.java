@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class GravacaoService {
@@ -31,6 +33,7 @@ public class GravacaoService {
     @Autowired
     private MusicaService musicaServ;
 
+    private final List<Gravacao> lstGrav = new ArrayList<>();
     public List<Gravacao> findAll() {
 
         return gravacaoRepo.findAll();
@@ -66,5 +69,41 @@ public class GravacaoService {
 
         PageRequest pageRequest = PageRequest.of(page, size);
         return gravacaoRepo.findAll(pageRequest);
+    }
+
+    // Obtem as gravacoes de um determinado cantor
+    public List<Gravacao> findGravacaoByCantor(Long codCantor) {
+
+        Cantor cantor = cantorServ.findById(codCantor);
+
+        return gravacaoRepo.findGravacaoByCantor(cantor);
+    }
+
+    // Obtém lista de gravações a partir de uma determinada parte do nome do cantor
+    public List<Gravacao> findByPartName(String name) {
+
+        List<Cantor> cantor = cantorServ.findByPartName(name);
+
+        return gravacaoRepo.findGravacaoByCantor(cantor);
+    }
+
+    // Obtém lista de gravações a partir de um determinado ano
+    public List<Gravacao> findByAnoGravacao(Integer anoGravacao) {
+
+//        final var lstGravacao = gravacaoRepo.findAll();
+//        final var lstGravacaoByAno = lstGravacao.stream()
+//                .filter(lstGrav -> lstGrav.getDataGravacao().getYear() == anoGravacao)
+//                .collect(Collectors.toList());
+//
+//        return lstGravacaoByAno;
+//
+
+        return gravacaoRepo.findByAnoDataGravacao(anoGravacao);
+    }
+
+    @Transactional
+    public void deleteById(Long codGravacao) {
+
+        gravacaoRepo.deleteById(codGravacao);
     }
 }

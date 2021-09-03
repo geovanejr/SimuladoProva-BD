@@ -77,4 +77,9 @@ public class Gravacao implements Serializable {
     public void setMusica(Musica musica) {
         this.musica = musica;
     }
+
+    public boolean isAnoGravacao(Integer anoGravacao) {
+
+        return anoGravacao.equals(this.getDataGravacao().getYear());
+    }
 }

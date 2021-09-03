@@ -16,9 +16,6 @@ public class Categoria implements Serializable {
     @Column(length = 50)
     private String descCategoria;
 
-//    @OneToMany(mappedBy = "categoria", fetch = FetchType.EAGER)
-//    private Musica musica;
-
     public Categoria() {
     }
 

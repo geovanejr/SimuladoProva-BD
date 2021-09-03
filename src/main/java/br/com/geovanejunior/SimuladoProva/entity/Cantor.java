@@ -6,7 +6,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="tb_cantores")
+@Table(name="tb_cantor")
+@NamedNativeQuery(
+        name = "Cantor.byPartName",
+        query = "Select * from tb_cantor where nome_cantor like CONCAT('%',?1,'%')",
+        resultClass = Cantor.class
+)
 public class Cantor implements Serializable {
 
     private static final long serialVersionUID = 1L;

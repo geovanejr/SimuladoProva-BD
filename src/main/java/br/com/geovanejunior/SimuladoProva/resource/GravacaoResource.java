@@ -41,6 +41,28 @@ public class GravacaoResource {
         return ResponseEntity.ok().body(gravacao);
     }
 
+    @GetMapping(value = "/cantor/{codCantor}")
+    public ResponseEntity<List<Gravacao>> findGravacaoByCantor(@PathVariable Long codCantor) {
+
+        List<Gravacao> gravacao = gravacaoServ.findGravacaoByCantor(codCantor);
+
+        return ResponseEntity.ok().body(gravacao);
+    }
+
+    @GetMapping(value = "/cantor/nome/{nomeCantor}")
+    public ResponseEntity<List<Gravacao>> findByPartName(@PathVariable String nomeCantor) {
+
+        List<Gravacao> gravacao = gravacaoServ.findByPartName(nomeCantor);
+        return ResponseEntity.ok().body(gravacao);
+    }
+
+    @GetMapping(value = "/cantor/ano/{anoGravacao}")
+    public ResponseEntity<List<Gravacao>> findByAnoGravacao (@PathVariable Integer anoGravacao) {
+
+        List<Gravacao> gravacao = gravacaoServ.findByAnoGravacao(anoGravacao);
+        return ResponseEntity.ok().body(gravacao);
+    }
+
     @GetMapping(value="/page")
     public ResponseEntity<Page<Gravacao>> pageGravacao(Pageable pageable) {
 
@@ -56,5 +78,13 @@ public class GravacaoResource {
         Page<Gravacao> gravacaoPage = gravacaoServ.pageGravacaoOrder(page, linesOfPage);
 
         return ResponseEntity.ok().body(gravacaoPage);
+    }
+
+    @PutMapping(value = "/delete/{codGravacao}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long codGravacao) {
+
+        gravacaoServ.deleteById(codGravacao);
+        return ResponseEntity.noContent().build();
+
     }
 }

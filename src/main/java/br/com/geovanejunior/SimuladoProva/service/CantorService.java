@@ -30,6 +30,13 @@ public class CantorService {
         ));
     }
 
+    public List<Cantor> findByPartName(String name) {
+
+        List<Cantor> lstcantor = cantorRepo.findByPartName(name);
+
+        return lstcantor;
+    }
+
     @Transactional(readOnly = false)
     public void save(Cantor cantor) {
 
