@@ -1,10 +1,11 @@
 package br.com.geovanejunior.SimuladoProva.service;
 
-import br.com.geovanejunior.SimuladoProva.entity.Categoria;
 import br.com.geovanejunior.SimuladoProva.entity.Musica;
 import br.com.geovanejunior.SimuladoProva.repository.MusicaRepository;
+import br.com.geovanejunior.SimuladoProva.service.exceptions.DataIntegrityException;
 import br.com.geovanejunior.SimuladoProva.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,25 +35,25 @@ public class MusicaService {
         ));
     }
 
-//    @Transactional(readOnly = true)
-//    public void save(Musica musica, Long codCategoria) {
-//
-//        var categ = categoriaServ.findById(codCategoria);
-//        musica.setCategoria(categ);
-//        musicaRepo.save(musica);
-//    }
-
-//    @Transactional(readOnly = true)
-//    public void save(Musica musica) {
-//        musicaRepo.save(musica);
-//    }
-//
     @Transactional(readOnly = false)
     public void saveMusica(Integer duracao, String titulo, Long codCategoria) {
 
         var categ = categoriaServ.findById(codCategoria);
         var musica = new Musica(duracao, titulo, categ);
         musicaRepo.save(musica);
+    }
+
+    @Transactional
+    public void deleteById(Long codMusica) {
+
+        try {
+
+            musicaRepo.deleteById(codMusica);
+        } catch (DataIntegrityViolationException ex) {
+            throw new DataIntegrityException(
+                    "Não é possivel excluir musica pois há gravações relacionadas a ela."
+            );
+        }
     }
 
 }

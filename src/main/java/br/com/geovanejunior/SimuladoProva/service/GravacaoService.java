@@ -90,14 +90,6 @@ public class GravacaoService {
     // Obtém lista de gravações a partir de um determinado ano
     public List<Gravacao> findByAnoGravacao(Integer anoGravacao) {
 
-//        final var lstGravacao = gravacaoRepo.findAll();
-//        final var lstGravacaoByAno = lstGravacao.stream()
-//                .filter(lstGrav -> lstGrav.getDataGravacao().getYear() == anoGravacao)
-//                .collect(Collectors.toList());
-//
-//        return lstGravacaoByAno;
-//
-
         return gravacaoRepo.findByAnoDataGravacao(anoGravacao);
     }
 

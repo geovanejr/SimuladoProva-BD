@@ -2,8 +2,10 @@ package br.com.geovanejunior.SimuladoProva.service;
 
 import br.com.geovanejunior.SimuladoProva.entity.Categoria;
 import br.com.geovanejunior.SimuladoProva.repository.CategoriaRepository;
+import br.com.geovanejunior.SimuladoProva.service.exceptions.DataIntegrityException;
 import br.com.geovanejunior.SimuladoProva.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,5 +35,18 @@ public class CategoriaService {
     public void save(Categoria categoria) {
 
         categRepo.save(categoria);
+    }
+
+    @Transactional
+    public void deleteById(Long codCategoria) {
+
+        try {
+
+            categRepo.deleteById(codCategoria);
+        } catch (DataIntegrityViolationException ex) {
+            throw new DataIntegrityException (
+                    "Não é possivel excluir categoria pois há músicas relacionadas a ela."
+            );
+        }
     }
 }
